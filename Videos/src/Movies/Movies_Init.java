@@ -33,13 +33,13 @@ public class Movies_Init {
 	ArrayList<String> want= new ArrayList<String>();
 	String moviesDownloaded =  movieDir + "downloaded.txt";
 	ArrayList<String> downloaded= new ArrayList<String>();
-	String moviesDownloading =  movieDir + "downloading.txt";
-	ArrayList<String> downloading= new ArrayList<String>();
+	String moviesDownloading =  movieDir + "haveTorrent.txt";
+	ArrayList<String> haveTorrent= new ArrayList<String>();
 	
 	public Movies_Init(){
 		System.out.println("-- Movies Loaded. --");
 		checkFiles();
-		updateFiles();
+		//updateFiles();
 		loginToYTS();
 		getBookmarked();
 		//moviesWanted();
@@ -184,7 +184,7 @@ public class Movies_Init {
 	public void getBookmarked(){//gets bookmarks from YTS using httpPOSt
 		System.out.println("Retriving bookmarks...");
 		String bookmarks = httpPOST("https://yts.to/api/v2/get_movie_bookmarks.json?user_key="+ user_key);
-		//System.out.println(bookmarks);
+		System.out.println(bookmarks);
 		if(bookmarks.contains("Query was successful")){
 			System.out.println("Successfully retrived bookmarks.");
 		}else{
@@ -237,7 +237,7 @@ public class Movies_Init {
 							if(response.toString().contains("Movie bookmarked has been removed")){
 								//user_key =response.toString().substring(response.toString().indexOf("user_key")+11, response.toString().indexOf("@meta")-4);
 								//System.out.println("Bookmark removed with id " +  (String) ((JSONObject) movies.get(i)).get("id").toString() + " and name " +  ((JSONObject) movies.get(i)).get("title_long").toString());
-									System.out.println("(" + (i +1) + "/" + movies.size() + ")\tDownloaded\t" + movieName);
+									System.out.println("(" + (i +1) + "/" + movies.size() + ")\tDownloading\t" + (String) ((JSONObject) movies.get(i)).get("title_long"));
 
 							}else if(response.toString().contains("Movie was never bookmarked")){
 								System.out.println("--> Movie was never bookmarkeded. " + movieName);

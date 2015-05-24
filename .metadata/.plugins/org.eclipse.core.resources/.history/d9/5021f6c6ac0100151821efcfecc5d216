@@ -1,0 +1,55 @@
+package Tvshows;
+
+import java.awt.PageAttributes.MediaType;
+import java.util.ArrayList;
+
+import javax.xml.ws.Response;
+
+import com.sun.security.ntlm.Client;
+
+public class Tvshows_Init {
+	String torrentDir = "torrents/";
+	String tvDir = "tvDir/";
+	String moviesWant = tvDir + "want.txt";
+	ArrayList<String> want= new ArrayList<String>();
+	String moviesDownloaded =  tvDir + "downloaded.txt";
+	ArrayList<String> downloaded= new ArrayList<String>();
+	String moviesDownloading =  tvDir + "haveTorrent.txt";
+	ArrayList<String> haveTorrent= new ArrayList<String>();
+	
+	public Tvshows_Init(){
+		System.out.println("-- TV Loaded. --");
+		updateFiles("D:/TvShows");
+		System.out.println("-- TV Completed. --");
+	}
+	public void updateFiles(String filePath){
+		
+	}
+	public void test(){
+		Client client = ClientBuilder.newClient();
+		Response response = client.target("http://api.themoviedb.org/3")
+		  .path("/configuration")
+		  .request(MediaType.TEXT_PLAIN_TYPE)
+		  .header("Accept", "application/json")
+		  .get();
+
+		System.out.println("status: " + response.getStatus());
+		System.out.println("headers: " + response.getHeaders());
+		System.out.println("body:" + response.readEntity(String.class));import javax.ws.rs.client.Client;
+		import javax.ws.rs.client.ClientBuilder;
+		import javax.ws.rs.client.Entity;
+		import javax.ws.rs.core.Response;
+		import javax.ws.rs.core.MediaType;
+
+		Client client = ClientBuilder.newClient();
+		Response response = client.target("http://api.themoviedb.org/3")
+		  .path("/configuration")
+		  .request(MediaType.TEXT_PLAIN_TYPE)
+		  .header("Accept", "application/json")
+		  .get();
+
+		System.out.println("status: " + response.getStatus());
+		System.out.println("headers: " + response.getHeaders());
+		System.out.println("body:" + response.readEntity(String.class));
+	}
+}
